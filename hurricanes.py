@@ -46,8 +46,11 @@ print('Billion:', convert_damages('100B'))
 print('Not recorded:', convert_damages('Damages not recorded'))
 print('Error test:', convert_damages('100T'))
 
-# test function by updating damages
-
+# update damages list
+updated_damages = []
+for value in damages:
+  updated_damages.append(convert_damages(value))
+print(updated_damages)
 
 # 2 
 # Create a Table
