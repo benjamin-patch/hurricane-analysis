@@ -24,6 +24,28 @@ deaths = [90,4000,16,3103,179,184,408,682,5,1023,43,319,688,259,37,11,2068,269,3
 conversion = {"M": 1000000,
               "B": 1000000000}
 
+# convert damage values to floats or pass-through notes
+def convert_damages(value):
+  if value[-1] == 'M':
+    stripped_value = value.strip('M')
+    converted_value = float(stripped_value) * 1000000
+  elif value[-1] == 'B':
+    stripped_value = value.strip('B')
+    converted_value = float(stripped_value) * 1000000000
+  elif value == 'Damages not recorded':
+    return value
+  else:
+    return 'Please enter valid data'
+  
+  # from values ending with 'M' or 'B'
+  return converted_value
+
+# test convert_damages() function
+print('Million:', convert_damages('100M'))
+print('Billion:', convert_damages('100B'))
+print('Not recorded:', convert_damages('Damages not recorded'))
+print('Error test:', convert_damages('100T'))
+
 # test function by updating damages
 
 
