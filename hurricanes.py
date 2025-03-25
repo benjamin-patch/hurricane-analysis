@@ -58,14 +58,17 @@ for value in damages:
 def construct_hurricane_dict(keys, *value_lists):
   """
   create a dictionary where keys come from the first list,
-  and values are tuples of corresponding values from other lists.
+  and values are separate dictionary entries.
   
   :param keys: List of keys for the dictionary
   :param value_lists: Variable number of lists for values
   :return: Dictionary with keys and corresponding values
   """
-  # use zip to combine all lists, with keys as the first list
-  return dict(zip(keys, zip(*value_lists)))
+  # transpose the value lists and zip with keys
+  return {
+    key: dict(zip([f'list_{i+1}' for i in range(len(value_lists))], values)) 
+    for key, values in zip(keys, zip(*value_lists))
+  }
 
 # Create and view the hurricanes dictionary
 hurricanes_dict = construct_hurricane_dict(names, names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
