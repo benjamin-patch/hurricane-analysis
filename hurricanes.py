@@ -41,21 +41,36 @@ def convert_damages(value):
   return converted_value
 
 # test convert_damages() function
-print('Million:', convert_damages('100M'))
-print('Billion:', convert_damages('100B'))
-print('Not recorded:', convert_damages('Damages not recorded'))
-print('Error test:', convert_damages('100T'))
+#print('Million:', convert_damages('100M'))
+#print('Billion:', convert_damages('100B'))
+#print('Not recorded:', convert_damages('Damages not recorded'))
+#print('Error test:', convert_damages('100T'))
 
 # update damages list
 updated_damages = []
 for value in damages:
   updated_damages.append(convert_damages(value))
-print(updated_damages)
+#print(updated_damages)
 
 # 2 
 # Create a Table
 
+def construct_hurricane_dict(keys, *value_lists):
+  """
+  create a dictionary where keys come from the first list,
+  and values are tuples of corresponding values from other lists.
+  
+  :param keys: List of keys for the dictionary
+  :param value_lists: Variable number of lists for values
+  :return: Dictionary with keys and corresponding values
+  """
+  # use zip to combine all lists, with keys as the first list
+  return dict(zip(keys, zip(*value_lists)))
+
 # Create and view the hurricanes dictionary
+hurricanes_dict = construct_hurricane_dict(names, names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
+
+print(hurricanes_dict)
 
 # 3
 # Organizing by Year
