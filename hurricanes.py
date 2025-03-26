@@ -55,25 +55,61 @@ for value in damages:
 # 2 
 # Create a Table
 
-def construct_hurricane_dict(keys, *value_lists):
-  """
-  create a dictionary where keys come from the first list,
-  and values are separate dictionary entries.
+def create_hurricane_dictionary(names, months, years, max_sustained_winds, 
+                                areas_affected, updated_damages, deaths):
+    """
+    Convert hurricane data from separate lists into a nested dictionary.
+    
+    This function takes multiple lists containing hurricane data and transforms 
+    them into a dictionary where each hurricane's name is a key, and the value 
+    is another dictionary containing detailed information about that hurricane.
+    
+    Parameters:
+    - names: List of hurricane names
+    - months: List of months when hurricanes occurred
+    - years: List of years of hurricane occurrence
+    - max_sustained_winds: List of maximum sustained wind speeds
+    - areas_affected: List of areas impacted by each hurricane
+    - updated_damages: List of damage amounts
+    - deaths: List of number of deaths caused by each hurricane
+    
+    Returns:
+    A dictionary where each key is a hurricane name, and each value is a 
+    dictionary containing detailed hurricane information.
+    """
+    # Create an empty dictionary to store hurricane information
+    hurricanes = {}
+    
+    # Iterate through the range of hurricane records
+    # Using len(names) ensures we process all hurricanes in the dataset
+    for index in range(len(names)):
+      # Create a dictionary for each individual hurricane
+      hurricane_info = {
+        "Name": names[index],
+        "Month": months[index],
+        "Year": years[index],
+        "Max Sustained Wind": max_sustained_winds[index],
+        "Areas Affected": areas_affected[index],
+        "Damage": updated_damages[index],
+        "Deaths": deaths[index]
+      }
+      
+      # Use the hurricane name as the key in the main hurricanes dictionary
+      # This allows easy access to each hurricane's information
+      hurricanes[names[index]] = hurricane_info
   
-  :param keys: List of keys for the dictionary
-  :param value_lists: Variable number of lists for values
-  :return: Dictionary with keys and corresponding values
-  """
-  # transpose the value lists and zip with keys
-  return {
-    key: dict(zip([f'list_{i+1}' for i in range(len(value_lists))], values)) 
-    for key, values in zip(keys, zip(*value_lists))
-  }
+    # Return the complete dictionary of hurricanes
+    return hurricanes
 
 # Create and view the hurricanes dictionary
-hurricanes_dict = construct_hurricane_dict(names, names, months, years, max_sustained_winds, areas_affected, updated_damages, deaths)
-
-print(hurricanes_dict)
+hurricane_dict = create_hurricane_dictionary(
+  names, months, years, max_sustained_winds, 
+  areas_affected, updated_damages, deaths
+)
+# print one hurricane as test
+# print(hurricane_dict["Cuba I"])
+# print fully nested hurricane dictionary
+print(hurricane_dict)
 
 # 3
 # Organizing by Year
