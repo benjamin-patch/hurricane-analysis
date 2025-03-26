@@ -249,6 +249,39 @@ def find_most_affected_area(hurricanes):
 
 # find highest mortality hurricane and the number of deaths
 
+def find_deadliest_hurricane(hurricanes):
+  """
+  Determine the hurricane that caused the greatest number of deaths.
+  
+  Parameters:
+  - hurricanes: A dictionary where keys are hurricane names and values are 
+                dictionaries containing hurricane information
+  
+  Returns:
+  A tuple containing the name of the deadliest hurricane and its death toll
+  """
+  # Initialize variables to track the deadliest hurricane
+  deadliest_hurricane_name = None
+  max_deaths = 0
+  
+  # Iterate through each hurricane in the input dictionary
+  for hurricane_name, hurricane_info in hurricanes.items():
+    # Get the number of deaths for the current hurricane
+    current_deaths = hurricane_info['Deaths']
+    
+    # Update the deadliest hurricane if current deaths are higher
+    if current_deaths > max_deaths:
+      max_deaths = current_deaths
+      deadliest_hurricane_name = hurricane_name
+  
+  # Return the name of the deadliest hurricane and its death toll
+  return (deadliest_hurricane_name, max_deaths)
+
+# Example usage:
+# deadliest = find_deadliest_hurricane(hurricanes)
+# print(f"The deadliest hurricane was {deadliest[0]}, "
+#       f"causing {deadliest[1]} deaths.")
+
 # 7
 # Rating Hurricanes by Mortality
 
