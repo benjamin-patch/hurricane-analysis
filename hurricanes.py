@@ -204,6 +204,45 @@ def count_affected_areas(hurricanes):
 
 # find most frequently affected area and the number of hurricanes there
 
+def find_most_affected_area(hurricanes):
+  """
+  Determine the area most frequently affected by hurricanes.
+  
+  Parameters:
+  - hurricanes: A dictionary where keys are hurricane names and values are 
+                dictionaries containing hurricane information
+  
+  Returns:
+  A tuple containing the most affected area and its number of occurrences
+  """
+  # Create an empty dictionary to store area frequency
+  affected_areas_count = {}
+  
+  # Iterate through each hurricane in the input dictionary
+  for hurricane_name, hurricane_info in hurricanes.items():
+    # Get the list of areas affected by the current hurricane
+    current_areas = hurricane_info['Areas Affected']
+    
+    # Count each area in the current hurricane's affected areas
+    for area in current_areas:
+      # If the area is not yet in the dictionary, initialize its count to 1
+      if area not in affected_areas_count:
+        affected_areas_count[area] = 1
+      # If the area is already in the dictionary, increment its count
+      else:
+        affected_areas_count[area] += 1
+  
+  # Find the area with the maximum number of occurrences
+  most_affected_area = max(affected_areas_count, key=affected_areas_count.get)
+  max_occurrences = affected_areas_count[most_affected_area]
+  
+  # Return the most affected area and its number of occurrences
+  return (most_affected_area, max_occurrences)
+
+# Example usage:
+# most_affected = find_most_affected_area(hurricanes)
+# print(f"The most affected area is {most_affected[0]}, "
+#       f"hit by hurricanes {most_affected[1]} times.")
 
 # 6
 # Calculating the Deadliest Hurricane
