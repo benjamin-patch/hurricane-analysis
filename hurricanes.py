@@ -41,16 +41,17 @@ def convert_damages(value):
   return converted_value
 
 # test convert_damages() function
-#print('Million:', convert_damages('100M'))
-#print('Billion:', convert_damages('100B'))
-#print('Not recorded:', convert_damages('Damages not recorded'))
-#print('Error test:', convert_damages('100T'))
+# print('Billion:', convert_damages('100B'))
+# print('Million:', convert_damages('100M'))
+# print('Billion:', convert_damages('100B'))
+# print('Not recorded:', convert_damages('Damages not recorded'))
+# print('Error test:', convert_damages('100T'))
 
 # update damages list
 updated_damages = []
 for value in damages:
   updated_damages.append(convert_damages(value))
-#print(updated_damages)
+# print(updated_damages)
 
 # 2 
 # Create a Table
@@ -102,20 +103,56 @@ def create_hurricane_dictionary(names, months, years, max_sustained_winds,
     return hurricanes
 
 # Create and view the hurricanes dictionary
-hurricane_dict = create_hurricane_dictionary(
+hurricanes = create_hurricane_dictionary(
   names, months, years, max_sustained_winds, 
   areas_affected, updated_damages, deaths
 )
 # print one hurricane as test
-# print(hurricane_dict["Cuba I"])
+# print(hurricanes["Cuba I"])
 # print fully nested hurricane dictionary
-print(hurricane_dict)
+# print(hurricanes)
 
 # 3
 # Organizing by Year
 
 # create a new dictionary of hurricanes with year and key
 
+def organize_hurricanes_by_year(hurricanes):
+  """
+  Reorganize the hurricane dictionary to group hurricanes by their year of occurrence.
+  
+  Parameters:
+  - hurricanes: A dictionary where keys are hurricane names and values are 
+                dictionaries containing hurricane information
+  
+  Returns:
+  A dictionary where keys are years and values are lists of hurricane dictionaries 
+  that occurred in that year
+  """
+  # Create an empty dictionary to store hurricanes organized by year
+  hurricanes_by_year = {}
+  
+  # Iterate through each hurricane in the input dictionary
+  for hurricane_name, hurricane_info in hurricanes.items():
+    # Get the current hurricane's year
+    current_year = hurricane_info['Year']
+      
+    # Check if the year already exists in our new dictionary
+    if current_year not in hurricanes_by_year:
+      # If the year doesn't exist, create a new list with this hurricane
+      hurricanes_by_year[current_year] = [hurricane_info]
+    else:
+      # If the year exists, append this hurricane to the existing list
+      hurricanes_by_year[current_year].append(hurricane_info)
+  
+  # Return the reorganized dictionary
+  return hurricanes_by_year
+
+# Example usage:
+hurricanes_by_year = organize_hurricanes_by_year(hurricanes)
+# print(hurricanes_by_year[1924])  # Print all hurricanes from 1924
+# print(len(hurricanes_by_year[1924]))  # Print number of hurricanes in 1924
+# print(hurricanes_by_year) # Print all hurricanes by year
 
 # 4
 # Counting Damaged Areas
