@@ -157,13 +157,52 @@ hurricanes_by_year = organize_hurricanes_by_year(hurricanes)
 # 4
 # Counting Damaged Areas
 
-# create dictionary of areas to store the number of hurricanes involved in
+# create dictionary of areas to store the number of hurricanes there
 
+def count_affected_areas(hurricanes):
+  """
+  Count how many times each area is affected by hurricanes.
+  
+  Parameters:
+  - hurricanes: A dictionary where keys are hurricane names and values are 
+                dictionaries containing hurricane information
+  
+  Returns:
+  A dictionary where keys are affected areas and values are the number 
+  of times those areas were impacted by hurricanes
+  """
+  # Create an empty dictionary to store area frequency
+  affected_areas_count = {}
+  
+  # Iterate through each hurricane in the input dictionary
+  for hurricane_name, hurricane_info in hurricanes.items():
+    # Get the list of areas affected by the current hurricane
+    current_areas = hurricane_info['Areas Affected']
+    
+    # Count each area in the current hurricane's affected areas
+    for area in current_areas:
+      # If the area is not yet in the dictionary, initialize its count to 1
+      if area not in affected_areas_count:
+        affected_areas_count[area] = 1
+      # If the area is already in the dictionary, increment its count
+      else:
+        affected_areas_count[area] += 1
+  
+  # Return the dictionary of area frequencies
+  return affected_areas_count
+
+# Example usage:
+# First, run the count_affected_areas function
+# area_frequencies = count_affected_areas(hurricanes)
+
+# Check how many times Mexico was affected
+# mexico_frequency = area_frequencies['Mexico']
+# print(f"Mexico was affected by hurricanes {mexico_frequency} times.")
 
 # 5 
 # Calculating Maximum Hurricane Count
 
-# find most frequently affected area and the number of hurricanes involved in
+# find most frequently affected area and the number of hurricanes there
 
 
 # 6
